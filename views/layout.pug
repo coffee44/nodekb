@@ -1,0 +1,50 @@
+doctype html
+html
+    head
+        //link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+        //script(src='https://code.jquery.com/jquery-3.5.1.min.js')
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet' href='/css/style.css')
+
+
+        title knowledgebase
+    body
+        nav.navbar.navbar-inverse
+            .container
+                    .navbar-header
+                        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                            span.sr-only Toggle navigation
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='/') KnowledgeBase
+                    #navbar.collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li
+                                a(href='/') Home
+                            if user
+                                li
+                                    a(href='/articles/add') Add Article
+                        ul.nav.navbar-nav.navbar-right
+                            if user
+                                li
+                                    a(href='/users/logout') Logout
+                            else
+                                li
+                                    a(href='/users/register') Register
+                                li
+                                    a(href='/users/login') Login
+        .container
+            != messages('message', locals)
+            if errors
+                each error in errors
+                    div(class="alert alert-danger") #{error.msg}
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy: 2017
+
+        script(src='/bower_components/jquery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/main.js')
